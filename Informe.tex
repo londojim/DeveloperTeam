@@ -57,6 +57,14 @@
 
 \tableofcontents
 \newpage
+
+%\thispagestyle{empty}
+%\listoffigures
+%\newpage
+%\listoftables
+%\newpage
+%\pagenumbering{arabic}
+
 \section{Introducción}
 \label{intro}
 En el presente proyecto se desarrolla un sistema de transmisión de encriptación que permite cifrar los datos transmitidos entre dos puntos. Es un demo de la transmisión y recepción de información entre las oficinas de una sucursal bancaria, los cuales usan infraestructura cableada para tal fin. La información viaja desde un computador de origen que es el generador de la información, hasta un computador destino que es el que se presenta al encargado de tomar decisiones en la bolsa de valores. \\
@@ -88,21 +96,23 @@ Como se debe tener una seña de reloj para que haya sincronismo en el sistema, s
 
 Se usa otro puerto digital de la placa de arduino como salida para  transmitir los datos al circuito integrado 75HC595. Luego de pasar la data por el circuito integrado ya se encuentra en paralelo, pues es esta precisamente la función del 75HC595, de ahí ya se puede transmitir la información al sistema de desencriptación el cuál será puesto en marcha por medio de compuertas lógicas  o compuertas secuenciales y su configuración depende de las reglas de desencriptación dadas. El módulo de desencriptación compara los datos que llegan del integrado 74HC595 con el dato que se tiene almacenado en la lógica combinacional, en el momento que estos dos datos son iguales, se envía una señal desde el módulo de desencriptación al arduino receptor indicandole que ya puede clasificar el mensaje.
 
+El uso del integrado 74HC595 es encarga de recibir el dato de forma serial y enviarlo en forma paralela al módulo combinacianal, es este módulo  el que permite liberar procesamiento de software a los arduinos y poder designar la llave de desencriptación de forma manual
+
 
 Cuando el arduino receptor tenga la información clasificada se procederá a mostrarla en pantalla, para ello se tiene planeado utilizar una pantalla lcd, componente que se encuentra disponible en la plataforma tinkercard
 
-recibir el arreglo
-
-logica combinacional detectar la bandera
-
-desencriptación
 
     \begin{figure}[h]
     \includegraphics[width=12cm]{imagen/Sistema.png}
     \centering
-    \caption{Esquema del sistema}
+    \caption{Esquema del sistema  \footnotemark}
     \label{fig:Sistema}
     \end{figure}
+   
+\footnotetext{}
+
+
+
 
 \section{75HC595}
 \subsection{Un breve vistazo}
@@ -113,9 +123,13 @@ El circuito integrado 75HC595 tiene un empaquetado de 16 puertos, donde el norte
     \begin{figure}[h]
     \includegraphics[width=6cm]{imagen/Pines ci.png}
     \centering
-    \caption{Vista superior 75HC595}
+    \caption{Vista superior 75HC595\footnotemark}
     \label{fig:Pines ci}
     \end{figure}
+
+\footnotetext{https://www.ti.com/product/SN74HC595}
+
+
 
 \newpage
 \subsection{Explicación de la esctructura Interna}
@@ -128,9 +142,11 @@ En la figura \ref{fig:Estructura Interna} se puede ver la esctructura interna de
 \begin{figure}[H]
     \includegraphics[width=8cm,angle=0, height=10cm ]{imagen/estructuraInterna.pdf}
     \centering
-    \caption{Estructura Interna}
+    \caption{Estructura Interna \footnotemark}
     \label{fig:Estructura Interna}
     \end{figure}
+    
+    \footnotetext{https://www.ti.com/product/SN74HC595}
 
 \subsection{Como conectar el 75HC595}
 
@@ -142,9 +158,13 @@ La conexión descrita se deduce con ayuda del cuadro \ref{fig:Modos}.
     \begin{figure}[h]
     \includegraphics[width=12cm]{imagen/Modos.png}
     \centering
-    \caption{Modos funcionales 75HC595}
+    \caption{Modos funcionales 75HC595\footnotemark}
     \label{fig:Modos}
     \end{figure}
+    
+    \footnotetext{https://www.ti.com/product/SN74HC595}
+
+    
     
 \subsection{Aplicaciones y algunos ejemplos}
 Entre sus aplicaciones se encuentran usos para switches de red, servidores, desplegar información por diodos emisores de luz led, entre otros.
