@@ -80,8 +80,22 @@ Desarrollar en equipo un sistema de encriptación y desencriptación de informac
 
 \end{itemize}
 \section{Análisis del problema y consideraciones}
-como solucionar el problema
-posibles opciones
+Como se está implementando un sistema de transmisión de información se analiza que será necesario tener dos placas de arduino para que una haga las veces de transmisor y la otra haga las veces de receptor.
+
+La  información entra al arduino vía serial, en este punto la información ya se encuentra encriptada. Como se desconoce la longuitud de la trama encriptada se deduce que se deberá hacer uso de memoría dinámica, haciendo uso de datos tipo puntero.\\
+
+Como se debe tener una seña de reloj para que haya sincronismo en el sistema, se pueden definir dos pines digitales de la placa de arduino como puertos de salida y escribir en estos cambios de estado para simular las señales de reloj que el integrado requiere para su operación correctamente. Acá una consideración a tener en cuenta es que la placa de arduino transmisora, el circuito integrado 75HC595 y la placa de arduina receptora deben estar sincronizadas entre si, por lo que al momento de la implementación se debe tener especial cuidado con este, pues si esto falla es muy probable que la información no llegue integra al receptor.\\
+
+Se usa otro puerto digital de la placa de arduino como salida para  transmitir los datos al circuito integrado 75HC595. Luego de pasar la data por el circuito integrado ya se encuentra en paralelo, pues es esta precisamente la función del 75HC595, de ahí ya se puede transmitir la información al sistema de desencriptación el cuál será puesto en marcha por medio de compuertas lógicas  o compuertas secuenciales y su configuración depende de las reglas de desencriptación dadas. El módulo de desencriptación compara los datos que llegan del integrado 74HC595 con el dato que se tiene almacenado en la lógica combinacional, en el momento que estos dos datos son iguales, se envía una señal desde el módulo de desencriptación al arduino receptor indicandole que ya puede clasificar el mensaje.
+
+
+Cuando el arduino receptor tenga la información clasificada se procederá a mostrarla en pantalla, para ello se tiene planeado utilizar una pantalla lcd, componente que se encuentra disponible en la plataforma tinkercard
+
+recibir el arreglo
+
+logica combinacional detectar la bandera
+
+desencriptación
 
     \begin{figure}[h]
     \includegraphics[width=12cm]{imagen/Sistema.png}
@@ -148,7 +162,7 @@ Para desencriptar la información se deben tener en cuenta las reglas de encript
 \subsection{Recepción}
 
 
-\section{Explicación del código} 
+\section{Explicación del código fuente} 
  
 \label{Elaboracion}
 \subsection{ASD}
