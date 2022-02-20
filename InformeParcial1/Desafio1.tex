@@ -13,37 +13,37 @@
 \begin{titlepage}
     \begin{center}
         \vspace*{2cm}
-
+            
         \Huge
         \textbf{`Nada es lo que parece' \\
         Proyecto de encriptación de información}
-
+            
         \vspace{0.5cm}
         \LARGE
         Parcial 1\\
         Informática 2
 
-
-
+        
+            
         \vspace{2,5cm}
-
+            
         \textbf{
         Katerin Henao Henao\\
         c.c.1036953583\\
         Diego Alejandro Londoño Jiménez\\
         c.c.71377279\\
         }
-
+            
         \vfill
-
+            
         \vspace{2,5cm}
-
+            
         \Large
         Despartamento de Ingeniería Electrónica y Telecomunicaciones\\
         Universidad de Antioquia\\
         Medellín\\
         Febrero de 2022
-
+            
     \end{center}
 \end{titlepage}
 
@@ -55,38 +55,40 @@ En el presente proyecto se desarrolla un sistema de transmisión de encriptació
 Para el desarrollo se hizo uso de la plataforma Tinkercard y de diferentes componentes circuitales como el circuito integrado 75HC595 entre otros. Además todo el desarrollo del proyecto se hace con manejo de repositorios
 
 
-\section{Justificación}
+\section{Justificación} 
 \label{contenido}
 El flujo actual de información en la web transporta datos sensibles como por ejemplo información bancaria; ante las técnicas para acceso indebido a la información impropia es necesario utilizar diferentes técnicas para protección de los datos. Entre ellos está la encriptación que se ha hecho indispensable porque ayuda a proteger y mantener la confidencialidad de la información cuando esta se envía de un lugar a otro. La encriptación es un método de codificación de la data que permite que solo las partes interesadas puedan comprenderla a pesar de que terceros hayan accedido a ella.
 
-\section{Objetivo general}
+\section{Objetivo general} 
 \label{contenido}
 Desarrollar en equipo un sistema de encriptación y desencriptación de información entre un transmisor y un receptor utilizando la plataforma Tinkercad
 
-\section{Objetivos específicos}
+\section{Objetivos específicos} 
 \label{contenido}
 \begin{itemize}
 \item Consolidar las habilidades adquiridas en el lenguaje de programación C++
-\item Enlazar los diferentes conocimientos adquiridos en el curso de informática ll
+\item Enlazar los diferentes conocimientos adquiridos en el curso de informática ll 
 \item Afianzar el trabajo el equipo en el desarrollo de un proyecto
 
 \end{itemize}
-\section{ANÁLISIS DEL PROBLEMA Y CONSIDERACIONES}
+\section{Análisis del problema y consideraciones} 
 como solucionar el problema
 
-74HC595
+
+\section{75HC595} 
 El 75HC595 es un circuito integrado digital, recibe los datos de entrada en forma serial(aquí va indice que es serial) hasta ocho bits y entrega sus datos a la salida de forma paralela (aquí va indice)
 Entre sus aplicaciones se encuentran usos para s
+\section{Explicación de la arquitectura} 
 
-\section{75HC595}
-\section{Explicación de la arquitectura}
-\section{Explicación general}
+
+
+\section{Explicación del código fuente} 
 
 \subsection{Esquema donde describa las tareas que usted definió en el desarrollo del algoritmo}
     \begin{figure}[h]
-    \includegraphics[width=3cm]{esquema.jpeg}
+    \includegraphics[width=8cm]{Sistema.png}
     \centering
-    \caption{Esquema de proyecto}
+    \caption{Esquema del sistema}
     \label{fig:esquema}
     \end{figure}
 
@@ -94,7 +96,7 @@ Entre sus aplicaciones se encuentran usos para s
 Se parte de que el usuario es el que ingresa los datos por el monitor serial
 El grupo decidio partir de los conocimientos de arduino para empezar el montaje de la protoboard en la pagina de simulacion Tinkercad, segun las instruciones del parcial, realizar una matriz de leds 8x8.
 Quedaran organizados los leds de la siguiente forma.
-
+    
     \begin{figure}[h]
     \includegraphics[width=6cm]{diagrama.png}
     \centering
@@ -106,7 +108,7 @@ Quedaran organizados los leds de la siguiente forma.
 De los problemas que surgieron en el desarrolo se destaca el tiempo, pues implico dedicarle mucho tiempo ya que habian otras materias que requerian dicho tiempo, ademas trabajar a distancia con los compañeros no siempre fue acorde a los horarios de cada uno, hay que añadir que el grupo se tuvo que familiarizar con la plataforma y el funcionamiento del integrado.
 La parte mas complicada de implementar fue usar los punteros, arreglos y la mamemoria dinamica para ingresar y reproducir los patrones continuamente en la matriz de leds.
 
-\section{Evolución del algoritmo y consideraciones a tener en cuenta en la implementación}
+\section{Evolución del algoritmo y consideraciones a tener en cuenta en la implementación} 
 \label{contenido}
 \subsection{Evolucion}
 En el desarrolo del algoritmo el principal problema fue entender el funcionamiento de la matriz de leds formada por los circuitos integrados, el cual se definio en un funcionamiento lineal de filas con posiciones encendidas y apagadas, la clave fue tomar en cuenta la sincronia de los relojes de desplazamiento y de salida para encender fila por fila en la matriz;para ingresar un patron en la matriz nos valimos que funcione de tal forma; que por medio de los relojes fuera recorriendo uno por uno los leds de la matriz e ir desplazando un "1" o un "0" para ir dando forma al patron.
@@ -147,7 +149,7 @@ Se conectan las entradas, reloj de registro de desplazmiento, reloj de registro 
     \label{fig:image4}
     \end{figure}
 
-\section{Codigo}
+\section{Codigo} 
 \label{Elaboracion}
 \subsection{Inicio}
 Se definen las variables para las entradas y salidas seriales.
@@ -200,7 +202,7 @@ Para visualizar un patron aparte del otro se añade un delay cada 8 filas lo que
  \caption{Funcion Publik}
  \label{f:Publik}
 \end{figure}
-
+    
 
 \subsection{Opciones}
 Se usa la funcion switch para ingresar a la opcion deseada y en cada case, se define el funcionamiento de las opciones a elegir.
@@ -212,7 +214,7 @@ Se usa la funcion switch para ingresar a la opcion deseada y en cada case, se de
     \end{figure}
 
 
-\section{Conclusiones}
+\section{Conclusiones} 
 \label{Algoritmo}
 
 
