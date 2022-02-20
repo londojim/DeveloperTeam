@@ -7,6 +7,14 @@
 \usepackage{cite}
 \usepackage{comment}
 \usepackage{subfig}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=black,citecolor=blue]{hyperref}
+	\urlstyle{same}
+\usepackage{cite}
+
+
+
 
 \begin{document}
 
@@ -29,9 +37,9 @@
             
         \textbf{
         Katerin Henao Henao\\
-        c.c.1036953583\\
+        C.c.1036953583\\
         Diego Alejandro Londoño Jiménez\\
-        c.c.71377279\\
+        C.c.71377279\\
         }
             
         \vfill
@@ -71,26 +79,66 @@ Desarrollar en equipo un sistema de encriptación y desencriptación de informac
 \item Afianzar el trabajo el equipo en el desarrollo de un proyecto
 
 \end{itemize}
-\section{Análisis del problema y consideraciones} 
+\section{Análisis del problema y consideraciones}
 como solucionar el problema
+posibles opciones
 
-
-\section{75HC595} 
-El 75HC595 es un circuito integrado digital, recibe los datos de entrada en forma serial(aquí va indice que es serial) hasta ocho bits y entrega sus datos a la salida de forma paralela (aquí va indice)
-Entre sus aplicaciones se encuentran usos para s
-\section{Explicación de la arquitectura} 
-
-
-
-\section{Explicación del código fuente} 
-
-\subsection{Esquema donde describa las tareas que usted definió en el desarrollo del algoritmo}
     \begin{figure}[h]
-    \includegraphics[width=8cm]{Sistema.png}
+    \includegraphics[width=12cm]{imagen/Sistema.png}
     \centering
     \caption{Esquema del sistema}
-    \label{fig:esquema}
+    \label{fig:Sistema}
     \end{figure}
+
+\section{75HC595}
+\subsection{Un breve vistazo}
+El 75HC595 es un circuito integrado digital, recibe los datos de entrada en forma serial,  hasta ocho bits, y entrega sus datos a la salida de forma paralela. 
+
+El circuito integrado 75HC595 tiene un empaquetado de 16 puertos, donde el norte se caracteriza por una entrada de medio óvalo. Los datos los recibe por el pin SER  y la salida de datos en paralelo se da por los pines Qa al Qh. Se tiene también un pin de tierra GND, un pin de energía VCC, un pin Qh' utilizado generalmente para cuando se desean conectar varios de estos integrados en cascadas donde el Qh' salida de un integrado sería la entrada de otro integrado. También se encuentran los pines SRCLK (reloj de registro de desplazamiento) y RCLK (reloj de registro de almacenamiento) correspondientes a la primer y segunda etapa respectivamente. Por último están los pines $\overline{SRCLR}$ y $\overline{OE}$, donde $\overline{OE}$ es el encargado de habilitar o desabilitar los pines de salida mientras que $\overline{SRCLR}$ puede borrar o no los datos del circuito integrado, dependiendo de si su estado es LOW o HIGH. 
+
+    \begin{figure}[h]
+    \includegraphics[width=6cm]{imagen/Pines ci.png}
+    \centering
+    \caption{Vista superior 75HC595}
+    \label{fig:Pines ci}
+    \end{figure}
+
+\newpage
+\subsection{Explicación de la esctructura Interna}
+
+En la figura 3 se puede ver la esctructura interna del 75HC595, esta estructura es del proveedor Texas Instruments \cite{Datasheet}, se divide en dos etapas, la etapa uno se encarga del desplazamiento de del bit que entra, estos flipflop se encuentran conectados en cascada para el desplazamiento del bit, la segunda estapa se encarga de almacenar los bit para cuando se de la orden de salida
+
+
+\begin{figure}[H]
+    \includegraphics[width=8cm,angle=0, height=10cm ]{imagen/estructuraInterna.pdf}
+    \centering
+    \caption{Estructura Interna}
+    \label{fig:Estructura Interna}
+    \end{figure}
+
+\subsection{Como conectar el 75HC595}
+En la hoja de datos del circuito integrado se encuentra toda la información referente a la forma de realizar las conexiones de los pines.
+    \begin{figure}[h]
+    \includegraphics[width=12cm]{imagen/Conexiones.png}
+    \centering
+    \caption{Modos funcionales 75HC595}
+    \label{fig:diagrama}
+    \end{figure}
+    
+Los pines Qa al Qh son los pines de salida donde se obtendran los datos de forma paralela. El pin GND se conecta a la tierra del sistema. El pin VCC es la energía del dispositivo, para este proyecto en particular se conecta al puerto que entrega 5v de la placa arduino. Al pin SER se conectan los datos de entrada, los cuales ingresan en forma serial. El pin $\overline{OE}$ se conecta a tierra para que quede en estado \textit{LOW}, pues estando en \textit{LOW} activa las salidas lo cual es precisamente lo que necesitamos. $\overline{SRCLR}$ se conecta a \textit{VCC} para desactivarlo, pues de tenerlo activado borraría el registro. Por su parte los pines RCKL y SRCLK se conectan cada uno a un pin de salida de la
+
+
+
+\subsection{Aplicaciones y algunos ejemplos}
+Entre sus aplicaciones se encuentran usos p ara s
+
+
+\section{Explicación de la arquitectura} 
+
+\section{Explicación del código} 
+
+\subsection{Esquema donde describa las tareas que usted definió en el desarrollo del algoritmo}
+
 
 \subsection{Algoritmo implementado}
 Se parte de que el usuario es el que ingresa los datos por el monitor serial
