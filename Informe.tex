@@ -2,6 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{listings}
+\usepackage{color}
+\definecolor{miverde}{rgb}{0,0.6,0}
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 \usepackage{cite}
@@ -13,6 +15,8 @@
 	\urlstyle{same}
 \usepackage{cite}
 
+\usepackage{geometry}
+\geometry{left=21mm,right=18mm,top=23mm,bottom=23mm,headheight=15pt} 	
 
 
 
@@ -102,7 +106,7 @@ El uso del integrado 74HC595 es encarga de recibir el dato de forma serial y env
 Cuando el arduino receptor tenga la información clasificada se procederá a mostrarla en pantalla, para ello se tiene planeado utilizar una pantalla lcd, componente que se encuentra disponible en la plataforma tinkercard
 
 
-    \begin{figure}[h]
+    \begin{figure}[H]
     \includegraphics[width=12cm]{imagen/Sistema.png}
     \centering
     \caption{Esquema del sistema  \footnotemark}
@@ -120,7 +124,7 @@ El 75HC595 es un circuito integrado digital, recibe los datos de entrada en form
 
 El circuito integrado 75HC595 tiene un empaquetado de 16 puertos, donde el norte se caracteriza por una entrada de medio óvalo. Los datos los recibe por el pin SER  y la salida de datos en paralelo se da por los pines Qa al Qh. Se tiene también un pin de tierra GND, un pin de energía VCC, un pin Qh' utilizado generalmente para cuando se desean conectar varios de estos integrados en cascadas donde el Qh' salida de un integrado sería la entrada de otro integrado. También se encuentran los pines SRCLK (reloj de registro de desplazamiento) y RCLK (reloj de registro de almacenamiento) correspondientes a la primer y segunda etapa respectivamente. Por último están los pines $\overline{SRCLR}$ y $\overline{OE}$, donde $\overline{OE}$ es el encargado de habilitar o desabilitar los pines de salida mientras que $\overline{SRCLR}$ puede borrar o no los datos del circuito integrado, dependiendo de si su estado es \textit{LOW} o \textit{HIGH}. En la figura \ref{fig:Pines ci} puede obtener una visualización de como están distribuidos los pines.
 
-    \begin{figure}[h]
+    \begin{figure}[H]
     \includegraphics[width=6cm]{imagen/Pines ci.png}
     \centering
     \caption{Vista superior 75HC595\footnotemark}
@@ -155,7 +159,7 @@ Los pines Qa al Qh son los pines de salida donde se obtendran los datos de forma
 La conexión descrita se deduce con ayuda del cuadro \ref{fig:Modos}.
 
 
-    \begin{figure}[h]
+    \begin{figure}[H]
     \includegraphics[width=12cm]{imagen/Modos.png}
     \centering
     \caption{Modos funcionales 75HC595\footnotemark}
@@ -170,22 +174,77 @@ La conexión descrita se deduce con ayuda del cuadro \ref{fig:Modos}.
 Entre sus aplicaciones se encuentran usos para switches de red, servidores, desplegar información por diodos emisores de luz led, entre otros.
 
 \subsubsection{Ejemplo usando pulsadores}
-El equipo DeveloperTeam implemento un ejemplo de uso del 75HC595 en la plataforma Tinkercard, en este ejemplo se utilizan pulsadores para enviar los datos al integrado y para las dos señales de reloj del integrado.
+El equipo DeveloperTeam implementó un ejemplo de uso del 75HC595 en la plataforma Tinkercard, en este ejemplo se utilizan pulsadores para enviar los datos al integrado y para las dos señales de reloj del integrado.
 
 
 
 \begin{figure}[H]
     \includegraphics[width=8cm ]{imagen/ej_pulsadores.png}
     \centering
-    \caption{Ejemplo uso 74HC595 con pulsadores}
+    \caption{Ejemplo uso 74HC595 con pulsadores\footnotemark}
     \label{fig:ej_pulsadores}
     \end{figure}
 
-https://www.tinkercad.com/things/dO7iXOHbnkA
+\footnotetext{https://www.tinkercad.com/things/dO7iXOHbnkA}
+
+\subsubsection{Integrado 74HC595 controlado por Arduino}
+
+\begin{figure}[H]
+    \includegraphics[width=8cm,angle=0, height=10cm]{imagen/74HC595_Arduino.png}
+    \centering
+    \caption{74HC595 con código en Arduino\footnotemark}
+    \label{fig:74HC595_Arduino}
+    \end{figure}
+
+\footnotetext{https://www.tinkercad.com/things/86uq2ecFPkF}
 
 
 
-\subsubsection{Ejemplo usando arduino}
+\begin{lstlisting}[language=c,commentstyle=\color{miverde},basicstyle=\ttfamily,caption= Código C++,frame=single,]
+
+
+#define SER 7     // pin 7 a SER del 74HC595
+#define RCLK 8    // pin 8 a RCLK del 74HC595
+#define SRCLK 9   // pin 9 a SRCLK del 74HC595
+
+
+int main()
+{
+
+  init();
+    
+      pinMode(SER, OUTPUT);		// pin establecido como salida
+      pinMode(RCLK, OUTPUT);	// pin establecido como salida
+      pinMode(SRCLK, OUTPUT);	// pin establecido como salida
+      
+  
+  while(1){
+    
+      digitalWrite(SER, 1);
+      
+      digitalWrite(SRCLK, 0);
+      digitalWrite(RCLK, 0);
+      digitalWrite(SRCLK, 1);
+      digitalWrite(RCLK, 1);
+      delay(500);
+      
+      
+      digitalWrite(SER, 0);
+     
+      digitalWrite(SRCLK, 0);
+      digitalWrite(RCLK, 0);
+      digitalWrite(SRCLK, 1);
+      digitalWrite(RCLK, 1);
+      delay(500);
+  }//Fin while
+}//Fin main
+
+
+\end{lstlisting}
+
+En el ejemplo de la figura \ref{fig:74HC595_Arduino} seguido de su código, se usa para mostrar el corrimiento de una entrada serial de 1,0 indefinidamente hasta que se detenga la simulación
+
+
 
 
 \section{Explicación de la arquitectura} 
@@ -204,26 +263,6 @@ Para desencriptar la información se deben tener en cuenta las reglas de encript
  
 \label{Elaboracion}
 
-\begin{figure}
- \centering
-  \subfloat[Publik1]{
-   \label{f:publik1}
-    \includegraphics[width=0.2\textwidth]{publik1.jpeg}}
-  \subfloat[Publik2]{
-   \label{f:publik2}
-    \includegraphics[width=0.3\textwidth]{publik2.jpeg}}
-  \subfloat[Publik3]{
-   \label{f:Publik3}
-    \includegraphics[width=0.2\textwidth]{publik3.jpeg}}
-   \subfloat[Publik4]{
-    \label{f:Publik4}
-     \includegraphics[width=0.2\textwidth]{publik4.jpeg}}
-   \subfloat[Publik5]{
-    \label{f:Publik5}
-     \includegraphics[width=0.2\textwidth]{publik5.jpeg}}
- \caption{Funcion Publik}
- \label{f:Publik}
-\end{figure}
 
 
 \section{Conclusiones} 
