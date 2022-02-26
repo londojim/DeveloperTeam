@@ -1,4 +1,10 @@
+/*
+Dirección de la simulaición
 
+https://www.tinkercad.com/things/3vaf2zqTyd7
+
+
+*/
   
 /*
 	Capitulo 70 de Arduino desde cero en Español.
