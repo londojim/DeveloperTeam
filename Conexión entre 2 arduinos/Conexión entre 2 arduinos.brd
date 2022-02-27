@@ -305,6 +305,11 @@ design rules under a new name.
 <wire x1="133.0601" y1="50.425" x2="84.8001" y2="36.455" width="0" layer="19" extent="1-1"/>
 <wire x1="133.0601" y1="50.425" x2="133.0601" y2="52.965" width="0" layer="19" extent="1-1"/>
 </signal>
+<signal name="U1_D13">
+<contactref element="U1" pad="D13"/>
+<contactref element="U2" pad="D13"/>
+<wire x1="53.975" y1="44.9695" x2="84.8001" y2="38.995" width="0" layer="19" extent="1-1"/>
+</signal>
 <signal name="U1_D6">
 <contactref element="U1" pad="D6"/>
 <contactref element="U2" pad="D6"/>

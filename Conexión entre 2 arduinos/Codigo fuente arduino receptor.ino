@@ -1,29 +1,30 @@
 //ARDUINO RECEPTOR
 #define reloj 13
-#define informacion 4
+#define banderaRX 6
+#define infoEncriptada 3
 int8_t i=0;
 int val=0;
 
 void setup()
 {
   Serial.begin(9600);
-  pinMode(13, INPUT);
-  pinMode(3, INPUT);
-  pinMode(6, OUTPUT);
+  pinMode(reloj, INPUT); ////Pin para la señal de reloj
+  pinMode(infoEncriptada, INPUT);// Pin para recibir la información "encriptada"
+  pinMode(banderaRX, OUTPUT); //Bandera de RX. Se enciende cuando logra leer el bit
 
 }
 
 void loop(){
   int infoRX[10] = {8,0,7,4,0,0,0,0,0,0};
   
-    if(digitalRead(13)){
-      val= digitalRead(3);
-      infoRX[i]= val;
+    if(digitalRead(reloj)){  //Si detecta flanco de subida:
+      val= digitalRead(infoEncriptada); //Lee la información
+      infoRX[i]= val; //Va guardando la información en un array
       i++;
-      digitalWrite(6,1);
+      digitalWrite(banderaRX,1); //Se enciende cuando logra recibir el bit
       delay(20);
     } 
-      digitalWrite(6,0);
+      digitalWrite(banderaRX,0); 
       delay(20);
       
       Serial.print("RX ");
