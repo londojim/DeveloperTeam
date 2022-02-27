@@ -1,3 +1,4 @@
+﻿//Puede verse en https://www.tinkercad.com/things/3oNF9EBDzeW
 //ARDUINO TRANSMISOR
 #define reloj 13 
 #define banderaRX 6
