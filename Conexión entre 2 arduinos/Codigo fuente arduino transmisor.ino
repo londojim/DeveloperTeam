@@ -1,8 +1,8 @@
-﻿//ARDUINO TRANSMISOR
+//ARDUINO TRANSMISOR
 #define reloj 13
 #define banderaRX 6
 #define infoENC 3
-//#define SRCLK 9   //pin 9 a SRCLK del 74HC595
+//#define SRCLK 9		//pin 9 a SRCLK del 74HC595
 
 int8_t pinRCLK = 10; //Pin del registro de salida. AMARILLO
 int8_t pinSRCLK = 9; //Pin del registro de desplazamiento. ROSADO
@@ -26,10 +26,36 @@ void setup()
   pinMode(reloj, OUTPUT); //Pin para la señal de reloj
   pinMode(infoENC, OUTPUT); // Pin para enviar la información "encriptada"
   pinMode(banderaRX, INPUT);  //Bandera de RX indicando que recibió
-int informacion[10] = {1,0,0,0,1,1,1,0,1,0}; //Información "encriptada"
   
-  for(int8_t i=0; i<10; i++){
+//int informacion[10] = {1,0,0,0,1,1,1,0,1,0}; //Información "encriptada"
+  
+  int informacion[8] = {0}; 
+  int info[1] = {58}; //Información "encriptada"
+  
+  ///INICIO QT
+    short binario[8]={0};
+        
     
+  for (int j=0;j<1;j++){
+    
+    for (int i=0;i<8 ;i++ ) {
+        informacion[i]= info[j] % 2;
+        info[j] /= 2;
+    }
+  }
+
+    //for (int i = 7;i>=0 ;i-- ) {
+   //     cout << binario[i];
+    //}
+ 
+
+////FIN QT
+ 
+  
+
+  Serial.print("---------");
+  for(int8_t i=7; i>=0; i--){
+
     digitalWrite(reloj, HIGH); //Flanco de subida señal de reloj
     //shiftOut(infoENC, SRCLK, MSBFIRST, informacion[i]);
     digitalWrite(infoENC,informacion[i]); //Se envía bit a bit 
