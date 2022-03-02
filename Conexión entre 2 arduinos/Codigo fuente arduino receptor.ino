@@ -44,6 +44,9 @@
 #define infoEncriptada 7
 int8_t i=0;
 int val=0;
+int resto =0, resultado=0;
+bool bandera = false;
+
 
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
@@ -57,13 +60,26 @@ void setup() {
   pinMode(banderaRX, OUTPUT); //Bandera de RX. Se enciende cuando logra leer el bit
 }
 
+
 void loop() {
   
-  int infoRX[10] = {};
+  int infoRX[8] = {0};
   
     if(digitalRead(reloj)){  //Si detecta flanco de subida:
       val= digitalRead(infoEncriptada); //Lee la información
       infoRX[i]= val; //Va guardando la información en un array
+      
+      resultado =(resto*2)+val;
+      resto=resultado;
+      
+       while (bandera==true)
+    {
+      lcd.setCursor(0, 1); //Se ubica el cursor en la columna i, fila 0
+      lcd.print("Bandera");
+      bandera=false;
+         
+    }
+      
       lcd.setCursor(i, 0); //Se ubica el cursor en la columna i, fila 0
       lcd.print(infoRX[i]);
       i++;      
@@ -76,7 +92,20 @@ void loop() {
       Serial.print("RX ");
       Serial.println(val);
   
-  if(i==10){
+  if(i==8){
+    
+    if (digitalRead(8) == 0)
+    {
+      bandera=true;
+    }
+    
+    
+    
+    lcd.setCursor(10, 0); //Se ubica el cursor en la columna i, fila 0
+    lcd.print(resto);
+  delay(50); 
+    resto=0;
+    resultado=0;
     i=0;
     lcd.clear();
   }  
