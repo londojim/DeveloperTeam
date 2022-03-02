@@ -43,9 +43,12 @@
 #define banderaRX 6
 #define infoEncriptada 7
 int8_t i=0;
-int val=0;
+int8_t val=0;
 int resto =0, resultado=0;
 bool bandera = false;
+bool bandera1 = false;
+int datos[100]={0};
+
 
 
 // initialize the library with the numbers of the interface pins
@@ -70,16 +73,8 @@ void loop() {
       infoRX[i]= val; //Va guardando la información en un array
       
       resultado =(resto*2)+val;
-      resto=resultado;
-      
-       while (bandera==true)
-    {
-      lcd.setCursor(0, 1); //Se ubica el cursor en la columna i, fila 0
-      lcd.print("Bandera");
-      bandera=false;
-         
-    }
-      
+      resto=resultado; //Numero en decimal
+            
       lcd.setCursor(i, 0); //Se ubica el cursor en la columna i, fila 0
       lcd.print(infoRX[i]);
       i++;      
@@ -96,18 +91,41 @@ void loop() {
     
     if (digitalRead(8) == 0)
     {
-      bandera=true;
+      bandera1=true;
+      lcd.setCursor(0, 1); //Se ubica el cursor en la columna 0, fila 1
+      lcd.print("Bandera"); delay(50);
+      lcd.clear();
+      //bandera=true;
+    }   
+   
+    if(bandera1==true){
+      datos[i]= resto;
+      i++;
     }
-    
     
     
     lcd.setCursor(10, 0); //Se ubica el cursor en la columna i, fila 0
     lcd.print(resto);
-  delay(50); 
+	delay(50); 
     resto=0;
     resultado=0;
     i=0;
     lcd.clear();
   }  
+  int8_t tam=0;
+  for (int8_t i=0; i<tam; i++){
+    int8_t k= i+15;
+    if(datos[i]==58){
+      if(datos[k]==1){
+        lcd.setCursor(0, 0); //Se ubica el cursor en la columna 0, fila 0
+        lcd.print(datos[1]); delay(50);
+        lcd.setCursor(4, 0); 
+        lcd.print(datos[2]); delay(50);
+          break;
+    	}
+    }
+
+  }
+
 }
  

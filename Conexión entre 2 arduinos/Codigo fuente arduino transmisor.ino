@@ -66,8 +66,8 @@ void loop()
         Serial.print("El valor enviado es ");
         Serial.println(informacion[i]);
       }//for SER
-    OnRCLK();//Esta funcion se deja fuera del envio de los 
-            //datos en serie para garantizar los falsos positivos de las claves
+		OnRCLK();//Esta funcion se deja fuera del envio de los 
+      			//datos en serie para garantizar los falsos positivos de las claves
 
     }//fin for j
 
